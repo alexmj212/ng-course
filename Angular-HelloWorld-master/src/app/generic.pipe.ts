@@ -5,7 +5,7 @@ export class GenericPipe implements PipeTransform {
 
     transform(value: any, format: string) {
         if (value) {
-            return value + ' ' + format;
+            return format + ' '+ value;
         } else {
             return value;
         }
