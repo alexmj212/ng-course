@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
     <style type="text/css" rel="stylesheet">
       .header { background: yellow; }
     </style>
-    <h1>Hello Children</h1>
-    <child [title]="headerText"></child>
+    <h1>Parent Header: {{ headerText }}</h1>
+    <child [title]="childHeaderText" (titleChanged)="titleChanged($event)"></child>
     <br><strong>Price:</strong> {{ price | currency:symbol:true }}
     <br><strong>Date:</strong> {{ birthday | date:'medium' }}
     <br><strong>Generic Pipe:</strong> {{ price | currency:symbol:true | generic:'About'}}
@@ -18,6 +18,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   headerText: string;
+  childHeaderText: string;
   price: number;
   symbol: string;
   birthday: any;
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headerText = 'Hey Chef';
+    this.headerText = 'Hello Children';
+    this.childHeaderText = 'Hey Chef';
     this.price = 3.50;
     this.symbol = 'USD';
     this.birthday = new Date();
@@ -47,6 +49,11 @@ export class AppComponent implements OnInit {
     }
     this.lochnessIsEnabled = !this.lochnessIsEnabled;
 
+  }
+
+  titleChanged(title: string){
+    this.headerText = "Goodbye Chef";
+    this.childHeaderText = "Goodbye Children";
   }
   
 }
