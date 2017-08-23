@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <h1>{{ title | uppercase }}</h1>
     <br><strong>Price:</strong> {{ price | currency:symbol:true }}
     <br><strong>Date:</strong> {{ birthday | date:'medium' }}
+    <br><h2>Generic: {{ price | currency:symbol:true | generic:'(includes discount)'}}</h2>
   `
 })
 export class AppComponent implements OnInit {
