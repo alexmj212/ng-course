@@ -11,8 +11,10 @@ AppComponent        ./app.component
 AppRoutingModule    ./app-routing.module
 
 */
-
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 /*
 
@@ -51,7 +53,11 @@ TODO 3: Declare and Bootstrap AppComponent
     CoreModule,           //Singleton objects (services, components that are loaded only once, etc.)
     SharedModule          //Shared (multi-instance) objects
   ],
-  declarations: [  ],
-  bootstrap:    [  ]
+  declarations: [ 
+    AppComponent
+   ],
+  bootstrap:    [ 
+    AppComponent
+   ]
 })
 export class AppModule { }

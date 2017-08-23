@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 /*
 
@@ -47,7 +47,8 @@ TODO 2: Modifying the CustomersComponent Class
 
 @Component({ 
   moduleId: module.id,
-  selector: 'cm-customers'
+  selector: 'cm-customers',
+  templateUrl: 'customers.component.html'
 })
 export class CustomersComponent  {
 
@@ -64,9 +65,13 @@ export class CustomersComponent  {
   
   //Add ngOnInit() here
 
+  ngOnInit() {
+    this.title = 'Customers';
+    this.filterText = 'Filter Customers:';
+    this.displayMode = DisplayModeEnum.Card;
 
-
-
+    this.getCustomersPage(1);
+  }
 
   changeDisplayMode(mode: DisplayModeEnum) {
       this.displayMode = mode;
