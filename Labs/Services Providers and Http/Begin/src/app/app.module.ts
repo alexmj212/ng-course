@@ -11,7 +11,7 @@ TODO 1: Import CoreModule
 Import CoreModule below.
 
 */
-
+import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { SharedModule }   from './shared/shared.module';
 
@@ -28,7 +28,8 @@ provided by CoreModule available throughout the entire application.
     BrowserModule,
     LoginModule,          //Eager loaded since we may need to go here right away as browser loads based on route user enters
     AppRoutingModule,     //Main routes for application
-    SharedModule          //Shared (multi-instance) objects
+    SharedModule,          //Shared (multi-instance) objects
+    CoreModule
   ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]

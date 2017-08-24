@@ -8,7 +8,8 @@ Injectable      @angular/core
 Http, Response  @angular/http 
 
 */
-
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 
 /*
@@ -45,7 +46,7 @@ Add the Injectable decorator above the DataService class.
 
 */
 
-
+@Injectable()
 export class DataService {
   
     customersBaseUrl: string = '/api/customers';
@@ -62,7 +63,7 @@ export class DataService {
 
     */
 
-    constructor() { }
+    constructor( private http: Http ) { }
 
     /*
 
@@ -110,8 +111,25 @@ export class DataService {
     */
 
     getCustomersPage(page: number, pageSize: number) : Observable<IPagedResults<ICustomer[]>> {
-
-                   
+        return this.http.get(`${this.customersBaseUrl}/page/${page}/${pageSize}`)
+            .map((res: Response) => {
+                //Access paging header and convert value to a number
+                const totalRecords = +res.headers.get('X-InlineCount');
+        
+                //Access returned customer data
+                let customers = res.json();
+        
+                //Add up the order total for each customer
+                this.calculateCustomersOrderTotal(customers);
+        
+                //Return a custom object containing the number of customers (for paging) and
+                //the selected page of customers
+                return {
+                    results: customers,
+                    totalRecords: totalRecords
+                };
+            })
+            .catch(this.handleError)
 
     }
     
@@ -149,9 +167,14 @@ export class DataService {
 
     */
     
-    getCustomer(id: number) {
-
-
+    getCustomer(id: number): Observable<ICustomer> {
+        return this.http.get(this.customersBaseUrl + '/' + id)
+            .map((res: Response) => {
+                let customer = res.json();
+                this.calculateCustomersOrderTotal([customer]);
+                return customer;
+            })
+            .catch(this.handleError)
     }
 
     getCustomers() : Observable<ICustomer[]> {

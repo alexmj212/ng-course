@@ -8,7 +8,7 @@ TODO 1: Importing HttpModule
 Import HttpModule from @angular/http
 
 */
-
+import { HttpModule } from '@angular/http';
 import { GrowlerModule } from './growler/growler.module';
 import { ModalModule } from './modal/modal.module';
 
@@ -22,7 +22,7 @@ Note that several other services are already imported such as FilterService,
 SorterService, AuthService, TrackByService and more.
 
 */
-
+import { DataService } from './services/data.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterService } from './services/filter.service';
 import { SorterService } from './services/sorter.service';
@@ -45,11 +45,11 @@ TODO 3: Adding HttpModule and DataService into CoreModule
 */
 
 @NgModule({
-  imports: [ CommonModule, RouterModule, GrowlerModule, ModalModule ],
-  exports: [ GrowlerModule, RouterModule, ModalModule, NavbarComponent ],
+  imports: [ CommonModule, RouterModule, GrowlerModule, ModalModule, HttpModule ],
+  exports: [ GrowlerModule, RouterModule, ModalModule, NavbarComponent, HttpModule ],
   declarations: [ NavbarComponent ],
   providers: [ SorterService, FilterService, TrackByService, 
-               DialogService, ValidationService, AuthService ] // these should be singleton
+               DialogService, ValidationService, AuthService, DataService ] // these should be singleton
 })
 /*
 

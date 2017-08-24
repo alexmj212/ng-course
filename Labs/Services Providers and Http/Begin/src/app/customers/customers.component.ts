@@ -10,7 +10,8 @@ TODO 1: Import DataService and Custom Interfaces
 
 */
 
-
+import { DataService } from '../core/services/data.service';
+import { ICustomer, IPagedResults } from '../shared/interfaces';
 
 import { FilterService } from '../core/services/filter.service';
 
@@ -39,7 +40,7 @@ export class CustomersComponent implements OnInit {
 
   */
 
-  constructor(private filterService: FilterService) { }
+  constructor(private filterService: FilterService, private dataService: DataService) { }
   
   ngOnInit() {
     this.title = 'Customers';
@@ -92,7 +93,13 @@ export class CustomersComponent implements OnInit {
 
   getCustomersPage(page: number) {
 
-
+    this.dataService.getCustomersPage((page - 1) * this.pageSize, this.pageSize)
+      .subscribe((response: IPagedResults<ICustomer[]>) => {
+        this.customers = this.filteredCustomers = response.results;
+        this.totalRecords = response.totalRecords;
+      },
+      (err: any) => console.log(err),
+      () => console.log('getCustomersPage() retrieved customers for page: ' + page));
 
 
   }
