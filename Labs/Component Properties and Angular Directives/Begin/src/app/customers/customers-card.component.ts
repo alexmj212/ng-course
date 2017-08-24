@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { ICustomer } from '../shared/interfaces';
 import { TrackByService } from '../core/services/trackby.service';
@@ -34,9 +34,7 @@ TODO 1: Add an Input Property to the Class
 })
 export class CustomersCardComponent implements OnInit {
 
-  //Add Input property here
-
-
+  @Input() customers: ICustomer[] = [];
   
   constructor(public trackbyService: TrackByService) { }
   

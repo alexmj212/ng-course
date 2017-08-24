@@ -27,12 +27,12 @@
                         orderTotal
 
                     -->
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Order Total</th>
+                            <th (click)="sort('firstName')">First Name</th>
+                            <th (click)="sort('lastName')">Last Name</th>
+                            <th (click)="sort('address')">Address</th>
+                            <th (click)="sort('city')">City</th>
+                            <th (click)="sort('state.name')">State</th>
+                            <th (click)="sort('orderTotal')">Order Total</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -52,7 +52,7 @@
                             ;trackBy:trackbyService.customer
 
                     -->                        
-                        <tr>
+                        <tr *ngFor="let customer of customers;trackBy:trackbyService.customer">
                             <td><img src="images/{{ customer.gender | lowercase }}.png"
                                     class="grid-image" alt="Customer Image" /></td>
                             <td><a [routerLink]="['/customers',customer.id,'details']">{{ customer.firstName  | capitalize }}</a></td>
@@ -72,7 +72,7 @@
                         then show the row.
 
                     -->
-                        <tr>
+                        <tr *ngIf="!customers.length">
                             <td>&nbsp;</td>
                             <td colspan="7">No Records Found</td>
                         </tr>

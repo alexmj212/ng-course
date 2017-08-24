@@ -35,7 +35,7 @@
 
         -->
                         <li class="toolbar-item">
-                            <a>
+                            <a (click)="changeDisplayMode(displayModeEnum.Card)" [class.active]="displayMode === displayModeEnum.Card">
                                 <span class="glyphicon glyphicon-th-large"></span> Card View
                             </a>
                         </li>
@@ -77,7 +77,7 @@
                displayMode !== displayModeEnum.Card
 
         -->
-
+        <cm-customers-card [customers]="filteredCustomers" [hidden]="displayMode !== displayModeEnum.Card"></cm-customers-card>
 
 
         <!--
@@ -99,7 +99,8 @@
                displayMode !== displayModeEnum.Grid
 
         -->
-
+        <cm-customers-grid [customers]="filteredCustomers" [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
+        
 
 
         <!--

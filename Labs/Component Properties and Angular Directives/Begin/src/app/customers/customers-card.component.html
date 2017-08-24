@@ -14,7 +14,7 @@
                ;trackBy:trackbyService.customer
 
         -->
-        <div class="col-sm-6 col-md-4 col-lg-3">
+        <div *ngFor="let customer of customers;trackBy:trackbyService.customer" class="col-sm-6 col-md-4 col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <a [routerLink]="['/customers',customer.id,'details']" class="white">
@@ -49,7 +49,7 @@
             then show the div.
 
         -->
-        <div>
+        <div *ngIf="!customers.length">
             No Records Found
         </div>
     </div>
